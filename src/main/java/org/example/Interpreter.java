@@ -66,6 +66,12 @@ public class Interpreter {
         String[] paragraphs = markdownContent.split("\n{2,}");
         StringBuilder builder = new StringBuilder();
         for (String paragraph : paragraphs) {
+            paragraph = paragraph.trim();
+            if (paragraph.endsWith("\n") && !paragraph.endsWith("\n\n")) {
+                paragraph = paragraph.substring(0, paragraph.length() - 1);
+            }
+
+            // Append paragraph wrapped in <p> tags
             if (!paragraph.isEmpty()) {
                 builder.append("<p>").append(paragraph).append("</p>\n");
             }
